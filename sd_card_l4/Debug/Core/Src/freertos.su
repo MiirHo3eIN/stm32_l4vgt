@@ -1,4 +1,4 @@
 freertos.c:84:6:vApplicationGetIdleTaskMemory	24	static
 freertos.c:97:6:vApplicationGetTimerTaskMemory	24	static
 freertos.c:111:6:MX_FREERTOS_Init	48	static
-freertos.c:150:6:StartDefaultTask	56	static
+freertos.c:150:6:StartDefaultTask	72	static

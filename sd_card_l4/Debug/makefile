@@ -48,8 +48,8 @@ sd_card_l4.bin \
 all: sd_card_l4.elf secondary-outputs
 
 # Tool invocations
-sd_card_l4.elf: $(OBJS) $(USER_OBJS) /home/miir_ho3ein/STM32CubeIDE/workspace_1.3.0/sd_card_l4/STM32L476VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "sd_card_l4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/miir_ho3ein/STM32CubeIDE/workspace_1.3.0/sd_card_l4/STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sd_card_l4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+sd_card_l4.elf: $(OBJS) $(USER_OBJS) /home/miir_ho3ein/projects/stm32l4/stm32_l4vgt/sd_card_l4/STM32L476VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "sd_card_l4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/miir_ho3ein/projects/stm32l4/stm32_l4vgt/sd_card_l4/STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sd_card_l4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

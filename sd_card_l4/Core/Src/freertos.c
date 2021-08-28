@@ -150,15 +150,21 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
-	uint8_t filename[12];
+	uint8_t filename1[12];
+  uint8_t filename2[12];
 	uint8_t SD_Data[18];
-	sprintf(filename, "TEST.csv");
+  uint8_t sd_data2[4];
+	sprintf(filename1, "TEST.csv");
+  sprintf(filename2, "test2.csv");
+
 	sprintf(SD_Data, "x,y,z,arsnr,mse\n");
+  sprintf(sd_data2, "x,\n");
 	if (f_mount(&SDFatFS, SDPath, 0) == FR_OK)
 	{
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, SET);
-		if ((f_open(&SDFile, (const TCHAR*)filename , FA_CREATE_ALWAYS | FA_WRITE)) == FR_OK)
-				{
+		if ((f_open(&SDFile, (const TCHAR*)filename1 , FA_CREATE_ALWAYS | FA_WRITE)) == FR_OK)
+    {
+          
 					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, SET);
 					if (f_write(&SDFile, SD_Data , strlen(SD_Data) , (void *)&byteswritten) == FR_OK)
 					{
@@ -171,6 +177,21 @@ void StartDefaultTask(void const * argument)
 					}
 
 				}
+
+    if ((f_open(&SDFile, (const TCHAR*)filename2, FA_CREATE_ALWAYS | FA_WRITE)) == FR_OK)
+    {
+          HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, SET);
+          if (f_write(&SDFile, sd_data2 , strlen(sd_data2) , (void *)&byteswritten) == FR_OK)
+          {
+            if (byteswritten == strlen(sd_data2))
+            {
+              HAL_GPIO_WritePin(GPIOD, GPIO_PIN_11, SET);
+              f_close(&SDFile);
+            }
+            
+          }
+
+        }
 
 	}
 	else HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
